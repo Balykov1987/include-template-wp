@@ -1,0 +1,21 @@
+// фильтр передает переменную $template - путь до файла шаблона.
+// Изменяя этот путь мы изменяем файл шаблона.
+add_filter( 'template_include', 'add_template' );
+function add_template( $template ) {
+
+	# аналог второго способа
+	// если это страница со слагом portfolio, используем файл шаблона page-portfolio.php
+	// используем условный тег is_page()
+	if( is_page('cart') ){
+		if ( $new_template = locate_template( array( '/templates/cart.php' ) ) )
+			return $new_template ;
+	}
+	
+	if( is_page('checkout') ){
+		if ( $new_template = locate_template( array( '/templates/checkout.php' ) ) )
+			return $new_template ;
+	}
+
+	return $template;
+
+}
